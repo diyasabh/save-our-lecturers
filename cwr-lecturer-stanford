@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Tool</title>
+    <style>
+      #emailPreview {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-top: 20px;
+        white-space: pre-wrap; /* Ensures line breaks in preview match email format */
+      }
+
+      .big-button {
+        background-color: #007bff; /* Button background color (blue) */
+        color: white; /* Text color */
+        padding: 15px 30px; /* Padding to increase the button size */
+        font-size: 20px; /* Larger font size */
+        font-weight: bold; /* Bold text */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor on hover */
+        text-transform: uppercase; /* Uppercase text */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: background-color 0.3s ease; /* Smooth transition */
+        display: block;
+        margin: 20px auto; /* Center the button horizontally */
+      }
+
+      .big-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Send an Email to Stanford Admin to Help Reinstate Our Creative Writing
+      Lecturers!
+    </h1>
+
+    <h2 style="color: Red">
+      The only way we win is if you can write to the admin expressing your
+      disappointment!
+    </h2>
+
+    <p>
+      Using this form, you can <strong>automatically send an email</strong> in
+      favor of reinstating our beloved Jones Lecturers to the following
+      concerned admin:
+    </p>
+
+    <ul>
+      <li>Debra Satz (Dean of Humanities and Sciences): dsatz@stanford.edu</li>
+      <li>
+        Gabriella Safran (Senior Associate Dean of Humanities and Arts):
+        gsafran@stanford.edu
+      </li>
+      <li>
+        Nicholas Jenkins (Co-Director of Creative Writing Program):
+        njenkins@stanford.edu
+      </li>
+      <li>
+        A Van Jordan (Co-Director of Creative Writing Program):
+        avjordan@stanford.edu
+      </li>
+      <li>Jonathan Levin (Incoming President): president@stanford.edu</li>
+      <li>James Hamilton (Incoming Vice Provost): jayth@stanford.edu</li>
+      <li>
+        Lanier Anderson (Senior Associate Dean for the Humanities and Arts):
+        lanier@stanford.edu
+      </li>
+      <li>Jenny Martinez (Provost): provost@stanford.edu</li>
+    </ul>
+
+    <p>
+      The recipient name in the email will be automatically rendered as
+      "[Recipient Name]" and will be personalized when the email is sent.
+    </p>
+
+    <h2>Fill in your details to autopopulate an email below:</h2>
+
+    <form id="emailForm">
+      <label for="firstName">First Name:</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        oninput="updatePreview();"
+      /><br /><br />
+
+      <label for="lastName">Last Name:</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        oninput="updatePreview();"
+      /><br /><br />
+
+      <label for="status">I am a Stanford:</label>
+      <select id="status" name="status" onchange="updatePreview();">
+        <option value="student">Student</option>
+        <option value="alum">Alum</option></select
+      ><br /><br />
+
+      <label for="classYear">Class Year:</label>
+      <input
+        type="text"
+        id="classYear"
+        name="classYear"
+        oninput="updatePreview();"
+      /><br /><br />
+
+      <label for="experience"
+        >Talk about your personal experience with the Jones Lecturers
+        (optional):</label
+      ><br />
+      <textarea
+        id="experience"
+        name="experience"
+        rows="4"
+        cols="50"
+        oninput="updatePreview();"
+      ></textarea
+      ><br /><br />
+
+      <h2>
+        Preview your email draft here: (scroll to the bottom to hit "send")
+      </h2>
+      <div id="emailPreview"></div>
+
+      <br />
+
+      <button type="button" class="big-button" onclick="generateEmail();">
+        Open Email Draft in Your Email Client
+      </button>
+    </form>
+
+    <script>
+      function updatePreview() {
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var status = document.getElementById("status").value;
+        var classYear = document.getElementById("classYear").value;
+        var experience = document.getElementById("experience").value;
+
+        var preview = "Dear [Recipient Name],\n\n";
+        preview +=
+          "My name is " +
+          firstName +
+          " " +
+          lastName +
+          " and I am a Stanford " +
+          status +
+          " in the class of " +
+          classYear +
+          ". ";
+        preview +=
+          "I am writing to express my grim disappointment at the firing of the Jones Lecturers of the Creative Writing department at Stanford University. These Jones Lecturers have left an indelible mark on the Stanford community and are so pivotal to intellectual life at Stanford. I believe it is unfair that they have been fired despite their excellence and commitment to teaching.\n\n";
+        preview +=
+          "Last week, the current Jones Lecturers in Stanford’s Creative Writing program were notified that the department would be eliminating their positions, with all 23 current lecturers moving instead to short-term contracts. The change comes less than a year after several Jones Lecturers petitioned the department for fair compensation, benefits, and a pathway to permanent teaching posts, considering that — until last year — many had effectively taken pay cuts to continue teaching at Stanford and were considered “very low income” by the state of California’s standards.\n\n";
+        preview +=
+          "Now, a year after meeting the lecturers’ demands, Stanford’s English department has announced that it will be ending their contracts and changing the Jones Lectureship to a position that will terminate after a couple of years, permanently ending the continuity in relationships that so many creative writing students have come to expect and cherish.\n\n";
+        preview +=
+          "I am deeply alarmed and saddened by these changes. The 23 Jones Lecturers at Stanford taught some of our favorite classes at Stanford, and often took special care to cultivate lasting relationships with undergraduate students that extended beyond graduation.\n";
+
+        if (experience) {
+          preview +=
+            "\nHere is a personal experience I had with the Jones Lecturers:\n" +
+            experience +
+            "\n";
+        }
+
+        preview +=
+          "\nThank you for your attention to this matter.\n\nSincerely,\n" +
+          firstName +
+          " " +
+          lastName;
+
+        document.getElementById("emailPreview").textContent = preview;
+      }
+
+      function generateEmail() {
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var status = document.getElementById("status").value;
+        var classYear = document.getElementById("classYear").value;
+        var experience = document.getElementById("experience").value;
+        var subject = encodeURIComponent(
+          "Concern Over the Firing of Jones Lecturers"
+        );
+
+        var body = "Dear [Recipient Name],%0D%0A%0D%0A";
+        body +=
+          "My name is " +
+          firstName +
+          " " +
+          lastName +
+          " and I am a Stanford " +
+          status +
+          " in the class of " +
+          classYear +
+          ". ";
+        body +=
+          "I am writing to express my grim disappointment at the firing of the Jones Lecturers of the Creative Writing department at Stanford University. These Jones Lecturers have left an indelible mark on the Stanford community and are so pivotal to intellectual life at Stanford. I believe it is unfair that they have been fired despite their excellence and commitment to teaching. %0D%0A%0D%0A";
+        body +=
+          "Last week, the current Jones Lecturers in Stanford’s Creative Writing program were notified that the department would be eliminating their positions, with all 23 current lecturers moving instead to short-term contracts. The change comes less than a year after several Jones Lecturers petitioned the department for fair compensation, benefits, and a pathway to permanent teaching posts, considering that — until last year — many had effectively taken pay cuts to continue teaching at Stanford and were considered “very low income” by the state of California’s standards. %0D%0A%0D%0A";
+        body +=
+          "Now, a year after meeting the lecturers’ demands, Stanford’s English department has announced that it will be ending their contracts and changing the Jones Lectureship to a position that will terminate after a couple of years, permanently ending the continuity in relationships that so many creative writing students have come to expect and cherish. %0D%0A%0D%0A";
+        body +=
+          "I am deeply alarmed and saddened by these changes. The 23 Jones Lecturers at Stanford taught some of our favorite classes at Stanford, and often took special care to cultivate lasting relationships with undergraduate students that extended beyond graduation.%0D%0A";
+
+        if (experience) {
+          body +=
+            "%0D%0AHere is a personal experience I had with the Jones Lecturers: %0D%0A" +
+            experience +
+            "%0D%0A";
+        }
+
+        body +=
+          "%0D%0AThank you for your attention to this matter.%0D%0A%0D%0ASincerely,%0D%0A" +
+          firstName +
+          " " +
+          lastName;
+
+        // var ccLecturer = document.getElementById("ccLecturer").selectedOptions;
+        // var ccEmails = [];
+        // for (var i = 0; i < ccLecturer.length; i++) {
+        //   ccEmails.push(ccLecturer[i].value);
+        // }
+
+        var mailtoLink =
+          "mailto:dsatz@stanford.edu,gsafran@stanford.edu,njenkins@stanford.edu,avjordan@stanford.edu,president@stanford.edu,jayth@stanford.edu,lanier@stanford.edu,provost@stanford.edu";
+        if (ccEmails.length > 0) {
+          mailtoLink += "?cc=" + ccEmails.join(",");
+        }
+        mailtoLink += "&subject=" + subject + "&body=" + body;
+
+        window.location.href = mailtoLink;
+      }
+    </script>
+  </body>
+</html>
